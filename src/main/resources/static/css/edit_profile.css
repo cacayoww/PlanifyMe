@@ -1,0 +1,34 @@
+#back-section {
+  margin-top: 20px;
+}
+.icon-arrow-back,
+.back-text {
+  color: #000;
+  font-size: 18px;
+}
+.icon-arrow-back {
+  margin-top: 5px;
+  margin-right: 5px;
+}
+.back-link:hover {
+  text-decoration: none;
+}
+
+.profile-pict {
+  width: 153px;
+  height: 153px;
+  border-radius: 100%;
+}
+.cta {
+  border-radius: 8px;
+  background: #000;
+  border: none;
+  color: white;
+  padding: 10px 48px 10px 48px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.cta:hover {
+  background: rgba(14, 14, 14, 0.97);
+  transition: 0.5s ease;
+}

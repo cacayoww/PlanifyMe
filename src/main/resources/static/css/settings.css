@@ -1,0 +1,37 @@
+#profile-account {
+  margin-left: 50px;
+  margin-top: 20px;
+}
+.profile-account-img {
+  width: 156px;
+  height: 156px;
+  border-radius: 100%;
+}
+.profile-account-name {
+  color: #000;
+
+  font-family: Poppins;
+  font-size: 41px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.profile-account-username {
+  color: #000;
+  margin-top: 12px;
+  font-family: Poppins;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.edit-link {
+  color: black;
+}
+.edit-link:hover {
+  color: black;
+}
+.icon-edit {
+  font-size: 40px;
+  margin-top: 30px;
+}

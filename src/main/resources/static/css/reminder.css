@@ -1,0 +1,17 @@
+#backback {
+    margin-top: 40px;
+    margin-bottom: 50px;
+}
+.reminder-card {
+    width: 100%;
+    margin-bottom: 20px;
+    flex-shrink: 0;
+    background-color: #fff;
+    border-radius: 8px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+.card-image {
+    width: 87px;
+    height: 99px;
+    flex-shrink: 0;    
+}

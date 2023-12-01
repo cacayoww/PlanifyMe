@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+
+    <!-- Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+      integrity="sha384-xOolHFLEh07PJGoPkLv1IbcEPTNtaed2xpHsD9ESMhqIYd0nLMwNLD69Npy4HI+N"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/fontawesome-6-pro@6.4.0/css/all.min.css"
+    />
+    <title>Planifyme</title>
+    <link rel="stylesheet" href="/css/dashboard.css" />
+    <link rel="stylesheet" href="/css/sidebar.css" />
+    <link rel="stylesheet" href="/css/reminder.css" />
+    <link rel="stylesheet" href="/css/global.css">
+  </head>
+  <body>
+    <section id="background-top"></section>
+    <section id="content">
+      <div class="row">
+        <!-- Tengah -->
+        <div class="col-lg-12">
+          <div
+            class="col-lg-9 ml-auto"
+            style="margin-bottom: 2%; margin-top: 2%"
+          >
+            <div class="reminder-card">
+              <div class="card-body">
+                <div class="row justify-content-between">
+                  <div class="col-lg-8">
+                    <h5 class="card-title">Category</h5>
+                    <p class="card-text">
+                      Dear User, Reminder for your Category “Task Name” due date
+                      DAY DD MONTH YEAR.
+                    </p>
+                  </div>
+                  <div class="col-lg-1">
+                    <p>TODAY</p>
+                  </div>
+                  <img src="/images/relax.png " alt="gambar" class="card-image" />
+                </div>
+              </div>
+            </div>
+            <div class="reminder-card">
+              <div class="card-body">
+                <div class="row justify-content-between">
+                  <div class="col-lg-8">
+                    <h5 class="card-title">Category</h5>
+                    <p class="card-text">
+                      Dear User, Reminder for your Category “Task Name” due date
+                      DAY DD MONTH YEAR.
+                    </p>
+                  </div>
+                  <div class="col-lg-1">
+                    <p>TODAY</p>
+                  </div>
+                  <img src="/images/relax.png " alt="gambar" class="card-image" />
+                </div>
+              </div>
+            </div>
+            <div class="reminder-card">
+              <div class="card-body">
+                <div class="row justify-content-between">
+                  <div class="col-lg-8">
+                    <h5 class="card-title">Category</h5>
+                    <p class="card-text">
+                      Dear User, Reminder for your Category “Task Name” due date
+                      DAY DD MONTH YEAR.
+                    </p>
+                  </div>
+                  <div class="col-lg-1">
+                    <p>TODAY</p>
+                  </div>
+                  <img src="/images/relax.png " alt="gambar" class="card-image" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- End Tengah -->
+
+        <!-- Sidebar kiri -->
+        <div class="col-lg-3">
+          <h1 class="logo">PlanifyMe</h1>
+          <div class="sidebar">
+            <div>
+              <div class="d-flex">
+                <i class="fa-thin fa-grid-2 sidebar-icon-nonactive"></i>
+                <a href="/dashboard" class="hover-link">
+                  <p class="sidebar-text">Dashboard</p>
+                </a>
+              </div>
+              <div class="d-flex">
+                <i class="fa-thin fa-envelope-open sidebar-icon-nonactive"></i>
+                <a href="/task" class="hover-link">
+                  <p class="sidebar-text">Task</p>
+                </a>
+              </div>
+              <div class="d-flex">
+                <i class="fa-thin fa-bell sidebar-icon"></i>
+                <a href="/reminder" class="hover-link">
+                  <p class=" active-text reminder">Reminder</p>
+                </a>
+              </div>
+
+              <div class="d-flex">
+                <i class="fa-thin fa-gear sidebar-icon-nonactive"></i>
+                <a href="/settings" class="hover-link">
+                  <p class=" sidebar-text ">Settings</p>
+                </a>
+              </div>
+            </div>
+
+            <div class="d-flex logout">
+              <i
+                class="fa-thin fa-right-from-bracket sidebar-icon-nonactive"
+              ></i>
+
+              <p class="sidebar-text">Logout</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- End Sidebar kiri -->
+        <!-- Sidebar Kanan -->
+        <div class="col-lg-3">
+          <div class="profile-section">
+            <img src="/images/profile.png" class="profile-img" alt="" />
+
+            <p class="text-center profile-name">Dino Kuning</p>
+          </div>
+        </div>
+        <!-- End Sidebar kanan -->
+      </div>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+      integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-Fy6S3B9q64WdZWQUiU+q4/2Lc9npb8tCaSX9FK7E8HnRr0Jz8D6OP9dO5Vg3Q9ct"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      window.addEventListener("scroll", function () {
+        var scrollPosition = window.scrollY;
+
+        var logo = document.querySelector(".logo");
+        var profileName = document.querySelector(".profile-name");
+        var profilImg = document.querySelector(".profile-img");
+
+        if (scrollPosition > 200) {
+          logo.classList.add("scrolled");
+        } else {
+          logo.classList.remove("scrolled");
+        }
+
+        if (scrollPosition > 120) {
+          profileName.classList.add("hidden");
+        } else {
+          profileName.classList.remove("hidden");
+        }
+
+        if (scrollPosition > 120) {
+          profilImg.classList.add("scrolled");
+        } else {
+          profilImg.classList.remove("scrolled");
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+@media only screen and (min-width: 992px) {
+  .sidebar {
+    padding: 46px 44px 0 40px;
+    position: fixed;
+    top: 161px;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    border-radius: 8px 8px 0 0;
+    background: #fff;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+  .sidebar-icon-task {
+    font-family: "icon"; /* Use the font-family you defined */
+    content: "\E110"; /* Replace with the Unicode character of your icon */
+    color: #ff0000; /* Set the color to red (you can use any valid CSS color value) */
+    /* Additional styles for your icon, like size, etc. */
+  }
+  .logo {
+    position: fixed;
+
+    top: 47px;
+    color: #fff;
+    font-family: "Ma Shan Zheng", cursive;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-left: 40px;
+  }
+  /* Add this CSS to your existing styles */
+
+  .profile-section {
+    position: fixed;
+    top: 20px;
+    right: 40px;
+  }
+  .profile-img {
+    height: 153px;
+    border-radius: 100%; /* To create a circular image */
+    background: url("../images/profile.png");
+  }
+  .profile-name {
+    color: #fff;
+
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  .sidebar-right {
+    padding: 46px 44px 0 40px;
+    position: fixed;
+    top: 220px;
+    right: 0;
+    width: 250px;
+    height: 100vh;
+    border-radius: 8px 8px 0 0;
+    background: #fff;
+    box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  }
+
+  .task {
+    margin-top: 22px;
+  }
+  .title {
+    color: #000;
+
+    font-family: Poppins;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .title span {
+    color: #000;
+    font-family: Poppins;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .sidebar-icon {
+    font-size: 24px;
+    margin-top: 5px;
+    margin-right: 24px;
+    color: black;
+  }
+  .sidebar-icon-nonactive {
+    color: #c6c6c6;
+    font-size: 24px;
+    margin-top: 5px;
+    margin-right: 24px;
+  }
+  .reminder {
+    margin-left: 5px;
+  }
+  .active-text {
+    color: #000 !important;
+
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .sidebar-text {
+    color: #c6c6c6;
+
+    font-family: Poppins;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  .logout {
+    margin-top: 300px;
+  }
+  .logo.scrolled {
+    color: black;
+  }
+
+  .profile-name.scrolled {
+    color: black;
+  }
+
+  .progress-angka {
+    color: #000;
+
+    font-family: Passion One;
+    font-size: 62px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+
+  .progress-angka {
+    color: #000;
+
+    font-family: Passion One;
+    font-size: 62px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
+}

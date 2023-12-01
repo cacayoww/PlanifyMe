@@ -1,0 +1,76 @@
+@import url("https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+body {
+  background: url("../images/background.png");
+  background-size: cover;
+  font-family: "Poppins", sans-serif;
+}
+.planifyme-body {
+  margin-top: 120px;
+  margin-right: 20px;
+  margin-left: 20px;
+}
+.logo {
+  color: #000;
+
+  text-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+  font-family: Ma Shan Zheng, cursive;
+  font-size: 60px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+label {
+  color: #000;
+
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+input {
+  height: 76px !important;
+}
+.text-to-login {
+  color: #000;
+
+  text-align: center;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+.text-to-login span {
+  color: #000;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+.cta {
+  border-radius: 8px;
+  background: #000;
+  border: none;
+  color: white;
+  padding: 12px 44px 12px 44px;
+  margin-bottom: 20px;
+}
+.cta:hover {
+  background: rgba(14, 14, 14, 0.97);
+  transition: 0.5s ease;
+}
+
+.form-input {
+  margin-top: 20px;
+}
+@media only screen and (min-width: 1024px) {
+  .form-input {
+    margin-left: 60px;
+    margin-right: 60px;
+  }
+}
+@media only screen and (min-width: 1230px) {
+  .form-input {
+    margin-left: 150px;
+    margin-right: 150px;
+  }
+}
