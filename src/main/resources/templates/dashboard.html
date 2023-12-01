@@ -67,7 +67,7 @@
               </a>
             </div>
 
-            <a href="/register" class="hover-link">
+            <a href="/logout" class="hover-link">
               <div class="d-flex logout">
                 <i
                   class="fa-thin fa-right-from-bracket sidebar-icon-nonactive"
@@ -99,48 +99,20 @@
             <p class="title">Category</p>
             <div class="row">
 
-              <div class="col-lg-4">
-                <div class="category-1 category-card">
+              <div class="col-lg-4" th:each="category: ${categories}">
+                <div class="category-card" th:style="'background-color: ' + ${category.color}">
                   <img
-                    src="/images/college.png"
-                    alt="college category"
+                    th:src="${category.imageUrl}"
+                    th:alt="${category.nama}+ 'category'"
+
                     class="category-1-img"
                   />
-                  <h6 style="color: #106fb2">College</h6>
+                  <h6 style="color: #ffffff" th:text="${category.nama}">nama</h6>
                 </div>
               </div>
+
               <div class="col-lg-4">
-                <div class="category-2 category-card">
-                  <img
-                    src="/images/chores.png"
-                    alt="chores category"
-                    class="category-2-img"
-                  />
-                  <h6 style="color: #ab1cb0">Chores</h6>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="category-3 category-card">
-                  <img
-                    src="/images/part-time.png"
-                    alt="part-time category"
-                    class="category-3-img"
-                  />
-                  <h6 style="color: #00a1ad">Part-Time</h6>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <div class="category-4 category-card">
-                  <img
-                    src="/images/relax.png"
-                    alt="relax category"
-                    class="category-4-img"
-                  />
-                  <h6 style="color: #0041bc">Relax</h6>
-                </div>
-              </div>
-              <div class="col-lg-4">
-                <a href="add_category.html" class="hover-link">
+                <a href="/dashboard/addcategory" class="hover-link">
                   <div class="add-category">
                     <div class="d-flex flex-column align-items-center">
                       <svg

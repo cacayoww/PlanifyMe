@@ -34,11 +34,11 @@ public class SpringSecurity {
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/css/**").permitAll()
-                                .requestMatchers("/dashboard").hasRole("USER")
-                                .requestMatchers("/task").hasRole("USER")
+                                .requestMatchers("/images/**").permitAll()
+                                .requestMatchers("/dashboard/**").hasRole("USER")
+                                .requestMatchers("/task/**").hasRole("USER")
                                 .requestMatchers("/reminder").hasRole("USER")
-                                .requestMatchers("/settings").hasRole("USER")
-                                .requestMatchers("/settings/editProfile").hasRole("USER")
+                                .requestMatchers("/settings/**").hasRole("USER")
                                 .requestMatchers("/").hasRole("USER")
                 ).formLogin(
                         form -> form

@@ -1,8 +1,10 @@
 package com.planifyme.planifymev1.controller;
 
+import com.planifyme.planifymev1.dto.CategoryDto;
 import com.planifyme.planifymev1.dto.UserDto;
 import com.planifyme.planifymev1.model.Task;
 import com.planifyme.planifymev1.model.User;
+import com.planifyme.planifymev1.service.CategoryService;
 import com.planifyme.planifymev1.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -21,9 +23,11 @@ import java.util.Objects;
 public class AuthController {
 
     private UserService userService;
+    private CategoryService categoryService;
 
-    public AuthController(UserService userService) {
+    public AuthController(UserService userService, CategoryService categoryService) {
         this.userService = userService;
+        this.categoryService = categoryService;
     }
     @GetMapping("/index")
     public String home(){
@@ -59,6 +63,15 @@ public class AuthController {
 
         System.out.println(userDto.getUsername());
         userService.saveUser(userDto);
+        CategoryDto college = new CategoryDto("college","this is college","#a6d1ef","/images/college.png");
+        CategoryDto chores = new CategoryDto("chores","this is chores","#ecaeed","/images/chores.png");
+        CategoryDto parttime = new CategoryDto("part-time","this is part-time","#86ebf1","/images/part-time.png");
+        CategoryDto relax = new CategoryDto("relax","this is relax","#86aaf1","/images/relax.png");
+
+        categoryService.saveCategory(college,userDto.getUsername());
+        categoryService.saveCategory(chores,userDto.getUsername());
+        categoryService.saveCategory(parttime,userDto.getUsername());
+        categoryService.saveCategory(relax,userDto.getUsername());
         return "redirect:/register?success";
 
 

@@ -21,10 +21,10 @@ public class Category {
     @ManyToOne
     @JoinColumn(name = "idUser")
     private User user;
-
-    @Column(nullable = false, unique = true)
     private String nama;
-
-    @Column(nullable = false)
     private String deskripsi;
+    private String color;
+    private String imageUrl;
+
+
 }

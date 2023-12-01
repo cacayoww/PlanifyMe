@@ -94,40 +94,47 @@
           <h1 class="logo">PlanifyMe</h1>
           <div class="sidebar">
             <div>
-              <div class="d-flex">
-                <i class="fa-thin fa-grid-2 sidebar-icon-nonactive"></i>
-                <a href="/dashboard" class="hover-link">
+              <a href="/dashboard" class="hover-link">
+                <div class="d-flex">
+                  <i class="fa-thin fa-grid-2 sidebar-icon-nonactive"></i>
                   <p class="sidebar-text">Dashboard</p>
-                </a>
-              </div>
-              <div class="d-flex">
-                <i class="fa-thin fa-envelope-open sidebar-icon-nonactive"></i>
-                <a href="/task" class="hover-link">
+                </div>
+              </a>
+
+              <a href="/task" class="hover-link">
+                <div class="d-flex">
+                  <i class="fa-thin fa-envelope-open sidebar-icon-nonactive"></i>
                   <p class="sidebar-text">Task</p>
-                </a>
-              </div>
-              <div class="d-flex">
-                <i class="fa-thin fa-bell sidebar-icon"></i>
-                <a href="/reminder" class="hover-link">
+                </div>
+              </a>
+
+              <a href="/reminder" class="hover-link">
+                <div class="d-flex">
+                  <i class="fa-thin fa-bell sidebar-icon"></i>
+
                   <p class=" active-text reminder">Reminder</p>
-                </a>
-              </div>
+                </div>
+              </a>
 
-              <div class="d-flex">
-                <i class="fa-thin fa-gear sidebar-icon-nonactive"></i>
-                <a href="/settings" class="hover-link">
-                  <p class=" sidebar-text ">Settings</p>
-                </a>
-              </div>
+
+              <a href="/settings" class="hover-link">
+                <div class="d-flex">
+                  <i class="fa-thin fa-gear sidebar-icon-nonactive"></i>
+
+                  <p class="sidebar-text">Settings</p>
+                </div>
+              </a>
             </div>
 
-            <div class="d-flex logout">
-              <i
-                class="fa-thin fa-right-from-bracket sidebar-icon-nonactive"
-              ></i>
+            <a href="/logout" class="hover-link">
+              <div class="d-flex logout">
+                <i
+                        class="fa-thin fa-right-from-bracket sidebar-icon-nonactive"
+                ></i>
 
-              <p class="sidebar-text">Logout</p>
-            </div>
+                <p class="sidebar-text">Logout</p>
+              </div>
+            </a>
           </div>
         </div>
 

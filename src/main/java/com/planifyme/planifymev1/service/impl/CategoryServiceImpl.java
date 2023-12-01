@@ -15,13 +15,21 @@ public class CategoryServiceImpl implements CategoryService {
 
     private CategoryRepository categoryRepository;
     private UserRepository userRepository;
+
+    public CategoryServiceImpl(CategoryRepository categoryRepository, UserRepository userRepository) {
+        this.categoryRepository = categoryRepository;
+        this.userRepository = userRepository;
+    }
+
     @Override
     public void saveCategory(CategoryDto categoryDto, String username) {
         Category category = new Category();
         category.setNama(categoryDto.getNama());
         category.setDeskripsi(categoryDto.getDeskripsi());
+        category.setColor(categoryDto.getColor());
         User user = userRepository.findByUsername(username);
         category.setUser(user);
+        category.setImageUrl(categoryDto.getImageUrl());
         categoryRepository.save(category);
     }
 

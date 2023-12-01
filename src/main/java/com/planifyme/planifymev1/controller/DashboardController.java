@@ -35,5 +35,10 @@ public class DashboardController {
         return "dashboard";
     }
 
+    @GetMapping("/dashboard/addcategory")
+    public String addcategory(){
+        return "add_category";
+    }
+
 
 }

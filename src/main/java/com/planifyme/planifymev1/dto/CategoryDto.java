@@ -14,5 +14,13 @@ public class CategoryDto {
     private int idCategory;
     private String nama;
     private String deskripsi;
+    private String color;
+    private String imageUrl;
 
+    public CategoryDto(String nama, String deskripsi, String color, String imageUrl) {
+        this.nama = nama;
+        this.deskripsi = deskripsi;
+        this.color = color;
+        this.imageUrl = imageUrl;
+    }
 }
