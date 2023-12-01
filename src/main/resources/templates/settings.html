@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head>
     <!-- Required meta tags -->
     <meta charset="utf-8" />
@@ -40,8 +40,8 @@
                     class="profile-account-img"
                   />
                   <div id="profile-account">
-                    <h1 class="profile-account-name">Dino Kuning</h1>
-                    <p class="profile-account-username">dinokuningl7</p>
+                    <h1 class="profile-account-name" th:text="${user.namaLengkap}">namaLengkap</h1>
+                    <p class="profile-account-username" th:text="${user.username}">dinokuningl7</p>
                   </div>
                 </div>
               </section>

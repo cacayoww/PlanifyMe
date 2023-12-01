@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -144,7 +144,7 @@
           <div class="profile-section">
             <img src="/images/profile.png" class="profile-img" alt="" />
 
-            <p class="text-center profile-name">Dino Kuning</p>
+            <p class="text-center profile-name" th:text="${user.namaLengkap}">namaLengkap</p>
           </div>
         </div>
         <!-- End Sidebar kanan -->

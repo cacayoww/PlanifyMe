@@ -1,6 +1,9 @@
 package com.planifyme.planifymev1.controller;
 
+import com.planifyme.planifymev1.model.User;
 import com.planifyme.planifymev1.service.UserService;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +20,9 @@ public class SettingController {
     public String settings(Model model){
 
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userService.findUserByUsername(authentication.getName());
-//        model.addAttribute("user",user);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(authentication.getName());
+        model.addAttribute("user",user);
 
 
         return "settings";
@@ -29,10 +32,9 @@ public class SettingController {
     public String editProfile(Model model){
 
 
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        User user = userService.findUserByUsername(authentication.getName());
-//        model.addAttribute("user",user);
-
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(authentication.getName());
+        model.addAttribute("user",user);
 
         return "edit_profile";
     }
