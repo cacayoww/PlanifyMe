@@ -35,6 +35,7 @@ public class SpringSecurity {
                                 .requestMatchers("/index").permitAll()
                                 .requestMatchers("/css/**").permitAll()
                                 .requestMatchers("/images/**").permitAll()
+                                .requestMatchers("/icon/**").permitAll()
                                 .requestMatchers("/dashboard/**").hasRole("USER")
                                 .requestMatchers("/task/**").hasRole("USER")
                                 .requestMatchers("/reminder").hasRole("USER")

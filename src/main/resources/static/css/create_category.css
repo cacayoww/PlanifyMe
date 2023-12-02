@@ -34,6 +34,21 @@
   align-items: center;
 }
 
+.category-pict img {
+  width: 100px; /* Set your desired width */
+  height: 100px; /* Maintain aspect ratio */
+  /* Additional styling properties if needed */
+}
+
+.cta {
+  border-radius: 8px;
+  background: #000;
+  border: none;
+  color: white;
+  padding: 12px 44px 12px 44px;
+  margin-bottom: 20px;
+}
+
 .new-category-form {
   margin-top: 20px;
   display: grid;
@@ -43,4 +58,54 @@
 .first-row {
   display: grid;
   grid-template-columns: 427px 67px;
+}
+
+.image-picker{
+  margin-left: 20px;
+  margin-right: 20px;
+}
+/* Hide radio buttons */
+input[type="radio"] {
+  display: none;
+}
+
+/* Style labels to resemble image buttons */
+label {
+  display: inline-block;
+  cursor: pointer;
+  margin-right: 10px;
+  position: relative;
+}
+
+/* Set image size to 50x50 pixels */
+label img {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  border: 1px solid transparent;
+  overflow: hidden;
+}
+
+/* On label hover, change border or add other effects for visual indication */
+label:hover img {
+  border: 2px solid #106fb2; /* Example border on hover */
+}
+
+
+
+/* On radio button selection, change the border or apply a style to indicate selection */
+input[type="radio"]:checked + label img {
+  border: 2px solid #106fb2; /* Example border on selection */
+}
+
+/* Hide initially displayed selected image */
+.selected-image img {
+  display: none;
+}
+
+/* Show selected image when the corresponding radio button is checked */
+input[type="radio"]:checked ~ .selected-image img {
+  display: block;
 }

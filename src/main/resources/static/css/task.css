@@ -1,3 +1,7 @@
 #task-actions {
   margin-top: 20px;
 }
+.custom-btn {
+  height: 43px; /* Set the desired height */
+  width: 121px; /* Set the desired width */
+}
