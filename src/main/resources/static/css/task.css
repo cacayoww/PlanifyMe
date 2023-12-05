@@ -5,3 +5,49 @@
   height: 43px; /* Set the desired height */
   width: 121px; /* Set the desired width */
 }
+/* Define your custom modal size */
+.modal-custom-size {
+  max-width: 1044px; /* Set your preferred maximum width */
+  width: 80%; /* Or use a specific width */
+  max-height: 198px; /* Set your preferred maximum height */
+  height: 100%;
+}
+
+/* Optional: Center the modal vertically on the page */
+.modal-dialog.modal-dialog-centered.modal-custom-size {
+  margin: auto; /* Center horizontally */
+  margin-top: 10vh; /* Center vertically */
+}
+
+.modal-att{
+  width: 1044px;
+  justify-content: center;
+}
+
+/* Your CSS file or within a <style> tag in HTML */
+.custom-input,
+.custom-input:focus,
+.custom-border {
+  border-radius: 0.25rem; /* Match the border radius of default form control */
+  border-color: #ced4da; /* Match the border color of default form control */
+  transition: box-shadow 0.15s ease-in-out;
+}
+
+.custom-input:focus,
+.custom-border:focus {
+  border-color: #80bdff; /* Change the border color to match the focused text input */
+  box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25); /* Optional: Add a shadow effect */
+}
+
+/* Continuing from the existing CSS */
+.custom-input + .custom-border option {
+  color: #495057; /* Match the default text color of .form-control for options */
+}
+
+.btn-close {
+  padding: 0.2rem 0.4rem; /* Adjust padding to change button size */
+  font-size: 1rem; /* Set font size for the button */
+}
+
+
+

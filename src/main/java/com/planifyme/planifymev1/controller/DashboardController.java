@@ -43,12 +43,18 @@ public class DashboardController {
 
     @GetMapping("/dashboard/addcategory")
     public String addcategory(Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(authentication.getName());
+        model.addAttribute("user", user);
         model.addAttribute("selectedImage","/icon/gallery-edit.svg");
         return "add_category";
     }
 
     @PostMapping("/dashboard/addcategory")
     public String inputImage(@ModelAttribute("selectedImage") String selectedImage, Model model){
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        User user = userService.findUserByUsername(authentication.getName());
+        model.addAttribute("user", user);
         System.out.println(selectedImage);
         image = selectedImage;
         model.addAttribute("selectedImage", selectedImage);

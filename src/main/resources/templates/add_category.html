@@ -97,7 +97,7 @@
           </section>
 
           <section class="create-category">
-            <!-- picture -->
+
 
             <div class="category-pict" data-toggle="modal" data-target="#exampleModalCenter">
               <img th:src="${selectedImage}" alt="choose image" />
@@ -201,7 +201,7 @@
           <div class="profile-section">
             <img src="/images/profile.png" class="profile-img" alt="" />
 
-            <p class="text-center profile-name">Dino Kuning</p>
+            <p class="text-center profile-name" th:text="${user.namaLengkap}">namaLengkap</p>
           </div>
           <div class="sidebar-right">
             <div class="d-flex align-items-center flex-column">

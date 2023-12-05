@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
   <head>
     <meta charset="utf-8" />
     <meta
@@ -90,13 +90,68 @@
           <div class="tasks">
             <section id="task-actions">
               <div class="d-flex justify-content-between mt-5">
-                <p class="selected mt-3">selected(0)</p>
                 <div class="d-flex">
-                  <p class="mark-complete mt-2 mr-5">mark as completed</p>
-                  <p class="edit-task mt-2 mr-5">edit task</p>
-                  <button type="button" class="btn button btn-dark custom-btn">
+                  <button type="button" class="btn button btn-dark custom-btn" data-toggle="modal"
+                          data-target="#exampleModalCenter">
                     Create +
                   </button>
+                </div>
+                <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+                     aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered modal-custom-size" role="document">
+                    <div class="modal-content">
+                      <form th:action="@{/task/createTask}" method="post">
+                      <div class="modal-body ">
+                        <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true" style="font-size: 1.5rem;">&times;</span>
+                        </button>
+                        <div class="form-group row">
+                          <label for="nama" class="col-sm-2 col-form-label">Task Name</label>
+                          <div class="col-sm-4">
+                            <input type="text" class="form-control" id="nama" name="nama" placeholder="Task Name">
+                          </div>
+                        </div>
+                        <div class="form-group row">
+                          <label for = "kategori" class="col-sm-2 col-form-label">Category</label>
+                          <div class="col-sm-4">
+                            <select id="kategori" name="kategori" class="form-select h-100 col-sm-12 custom-border custom-input">
+                              <option th:each="category: ${categories}" th:value="${category.nama}" th:text="${category.nama}">nama</option>
+                            </select>
+                          </div>
+                          <label for="dueDate" class="col-sm-2 col-form-label">Due Date</label>
+                          <div class="col-sm-4">
+                            <input type="date" class="form-control" id="dueDate" name="dueDate" placeholder="Due Date">
+                          </div>
+                        </div>
+                        <p>Reminder</p>
+                        <div class="form-group row">
+                          <div class="col-sm-3">
+                            <input type="checkbox" id="reminder1" name="reminder[0]" value="Bike">
+                            <label for="reminder1"> a week before</label><br>
+                          </div>
+                          <div class="col-sm-3">
+                            <input type="checkbox" id="reminder2" name="reminder[1]" value="Car">
+                            <label for="reminder2"> three days before</label><br>
+                          </div>
+                          <div class="col-sm-3">
+                            <input type="checkbox" id="reminder3" name="reminder[2]" value="Boat">
+                            <label for="reminder3"> a day before</label><br>
+                          </div>
+                          <div class="col-sm-3">
+                            <input type="checkbox" id="reminder4" name="reminder[3]" value="Boat">
+                            <label for="reminder4"> on the day</label><br>
+                          </div>
+
+                        </div>
+                        <div class="modal-att">
+                          <button type="submit" class="btn button btn-dark custom-btn">
+                            Save
+                          </button>
+                        </div>
+                      </div>
+                      </form>
+                    </div>
+                  </div>
                 </div>
               </div>
             </section>

@@ -34,6 +34,11 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public Category findByName(String kategori) {
+        return categoryRepository.findByNama(kategori);
+    }
+
+    @Override
     public List<Category> findCategoriesbyUser(User user) {
         return categoryRepository.findAllByUser(user);
     }
