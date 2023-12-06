@@ -12,7 +12,5 @@ public interface CategoryService {
 
     void saveCategory(CategoryDto categoryDto, String username);
 
-    Category findByName(String username);
-
-    List<Category> findCategoriesbyUser(User user);
+    List<CategoryDto> findCategoriesbyUser(User user);
 }

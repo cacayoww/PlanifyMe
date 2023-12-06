@@ -34,57 +34,57 @@
             class="col-lg-9 ml-auto"
             style="margin-bottom: 2%; margin-top: 2%"
           >
-            <div class="reminder-card">
-              <div class="card-body">
+            <div class="reminder-card" th:each="reminder: ${reminders}">
+              <div class="card-body" >
                 <div class="row justify-content-between">
                   <div class="col-lg-8">
-                    <h5 class="card-title">Category</h5>
+                    <h5 class="card-title" th:text="${reminder.namaKategori}">namaKategori</h5>
                     <p class="card-text">
-                      Dear User, Reminder for your Category “Task Name” due date
-                      DAY DD MONTH YEAR.
+                      Dear <span th:text="${reminder.namaUser}"></span>, Reminder for your <span th:text="${reminder.namaKategori}"></span>
+                      "<span th:text="${reminder.namaTask}"></span>" due date <span th:text="${reminder.dueDate}"></span>.
                     </p>
                   </div>
                   <div class="col-lg-1">
                     <p>TODAY</p>
                   </div>
-                  <img src="/images/relax.png " alt="gambar" class="card-image" />
+                  <img th:src="${reminder.imageUrl}" alt="gambar" class="card-image" />
                 </div>
               </div>
             </div>
-            <div class="reminder-card">
-              <div class="card-body">
-                <div class="row justify-content-between">
-                  <div class="col-lg-8">
-                    <h5 class="card-title">Category</h5>
-                    <p class="card-text">
-                      Dear User, Reminder for your Category “Task Name” due date
-                      DAY DD MONTH YEAR.
-                    </p>
-                  </div>
-                  <div class="col-lg-1">
-                    <p>TODAY</p>
-                  </div>
-                  <img src="/images/relax.png " alt="gambar" class="card-image" />
-                </div>
-              </div>
-            </div>
-            <div class="reminder-card">
-              <div class="card-body">
-                <div class="row justify-content-between">
-                  <div class="col-lg-8">
-                    <h5 class="card-title">Category</h5>
-                    <p class="card-text">
-                      Dear User, Reminder for your Category “Task Name” due date
-                      DAY DD MONTH YEAR.
-                    </p>
-                  </div>
-                  <div class="col-lg-1">
-                    <p>TODAY</p>
-                  </div>
-                  <img src="/images/relax.png " alt="gambar" class="card-image" />
-                </div>
-              </div>
-            </div>
+<!--            <div class="reminder-card">-->
+<!--              <div class="card-body">-->
+<!--                <div class="row justify-content-between">-->
+<!--                  <div class="col-lg-8">-->
+<!--                    <h5 class="card-title">Category</h5>-->
+<!--                    <p class="card-text">-->
+<!--                      Dear User, Reminder for your Category “Task Name” due date-->
+<!--                      DAY DD MONTH YEAR.-->
+<!--                    </p>-->
+<!--                  </div>-->
+<!--                  <div class="col-lg-1">-->
+<!--                    <p>TODAY</p>-->
+<!--                  </div>-->
+<!--                  <img src="/images/relax.png " alt="gambar" class="card-image" />-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
+<!--            <div class="reminder-card">-->
+<!--              <div class="card-body">-->
+<!--                <div class="row justify-content-between">-->
+<!--                  <div class="col-lg-8">-->
+<!--                    <h5 class="card-title">Category</h5>-->
+<!--                    <p class="card-text">-->
+<!--                      Dear User, Reminder for your Category “Task Name” due date-->
+<!--                      DAY DD MONTH YEAR.-->
+<!--                    </p>-->
+<!--                  </div>-->
+<!--                  <div class="col-lg-1">-->
+<!--                    <p>TODAY</p>-->
+<!--                  </div>-->
+<!--                  <img src="/images/relax.png " alt="gambar" class="card-image" />-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </div>-->
           </div>
         </div>
         <!-- End Tengah -->

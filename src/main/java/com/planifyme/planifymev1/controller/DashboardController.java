@@ -31,13 +31,11 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model){
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(authentication.getName());
-        List<Category> categories = categoryService.findCategoriesbyUser(user);
+        List<CategoryDto> categories = categoryService.findCategoriesbyUser(user);
         model.addAttribute("user",user);
         model.addAttribute("categories",categories);
-
         return "dashboard";
     }
 

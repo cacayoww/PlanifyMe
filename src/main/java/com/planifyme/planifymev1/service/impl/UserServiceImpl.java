@@ -36,19 +36,7 @@ public class UserServiceImpl implements UserService {
     public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-
-    @Override
-    public List<UserDto> findAllUsers() {
-        List<User> users = userRepository.findAll();
-        return users.stream().map((user)-> mapToUserDto(user)).collect(Collectors.toList());
-    }
-
-    private UserDto mapToUserDto(User user){
-        UserDto userDto = new UserDto();
-        userDto.setUsername(user.getUsername());
-        userDto.setNamaLengkap(user.getNamaLengkap());
-        return userDto;
-    }
+    
 }
 
 

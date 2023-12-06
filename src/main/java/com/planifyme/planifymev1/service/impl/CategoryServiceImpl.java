@@ -8,7 +8,9 @@ import com.planifyme.planifymev1.repository.UserRepository;
 import com.planifyme.planifymev1.service.CategoryService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -34,12 +36,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findByName(String kategori) {
-        return categoryRepository.findByNama(kategori);
+    public List<CategoryDto> findCategoriesbyUser(User user) {
+
+        List<Category> categories = categoryRepository.findAllByUser(user);
+        return categories.stream().map(this::convertModelToDto)
+                .collect(Collectors.toList());
     }
 
-    @Override
-    public List<Category> findCategoriesbyUser(User user) {
-        return categoryRepository.findAllByUser(user);
+    private CategoryDto convertModelToDto(Category category){
+        CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setNama(category.getNama());
+        categoryDto.setDeskripsi(category.getDeskripsi());
+        categoryDto.setImageUrl(category.getImageUrl());
+        categoryDto.setColor(category.getColor());
+        return categoryDto;
     }
 }

@@ -41,7 +41,6 @@ public class AuthController {
 
     @GetMapping("/register")
     public String showRegistrationForm(Model model){
-        // create model object to store form data
         UserDto user = new UserDto();
         model.addAttribute("user", user);
         return "register";
@@ -77,19 +76,12 @@ public class AuthController {
 
     }
 
-
-
-
     @GetMapping("/")
     public String dashboard1(Model model){
-
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(authentication.getName());
         model.addAttribute("user",user);
-
         return "redirect:/dashboard";
     }
-
 
 }

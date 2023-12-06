@@ -26,7 +26,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public void saveTask(TaskDto taskDto, String username) {
+    public Task saveTask(TaskDto taskDto, String username) {
         Task task = new Task();
         task.setNama(taskDto.getNama());
         task.setDueDate(taskDto.getDueDate());
@@ -34,7 +34,8 @@ public class TaskServiceImpl implements TaskService {
         task.setUser(user);
         Category category = categoryRepository.findByNama(taskDto.getKategori());
         task.setCategory(category);
-        taskRepository.save(task);
+        Task savedTask = taskRepository.save(task);
+        return savedTask;
     }
 
     @Override

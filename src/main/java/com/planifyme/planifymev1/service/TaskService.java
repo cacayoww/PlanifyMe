@@ -10,7 +10,7 @@ import java.util.List;
 @Service
 public interface TaskService {
 
-    void saveTask(TaskDto taskDto, String username);
+    Task saveTask(TaskDto taskDto, String username);
 
     List<Task> findTasksbyUser(User user);
 
