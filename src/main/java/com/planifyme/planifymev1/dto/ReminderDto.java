@@ -21,6 +21,10 @@ public class ReminderDto {
 
     private String namaKategori;
 
+    private String formattedDueDate;
+
+    private String dateRemindertoNow;
+
     private LocalDate dateReminder;
 
     private LocalDate dueDate;

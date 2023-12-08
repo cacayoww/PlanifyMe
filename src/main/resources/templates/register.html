@@ -37,6 +37,9 @@
               th:field="*{namaLengkap}"
               class="form-control"
       />
+      <p th:errors="*{namaLengkap}" class="text-danger"
+         th:if="${#fields.hasErrors('namaLengkap')}">
+      </p>
     </div>
     <div class="form-group">
       <label for="username">Username</label>
@@ -48,6 +51,9 @@
               th:field="*{username}"
               class="form-control"
       />
+      <p th:errors="*{username}" class="text-danger"
+         th:if="${#fields.hasErrors('username')}">
+      </p>
     </div>
     <div class="form-group">
       <label for="password">Password</label>
@@ -59,6 +65,9 @@
               th:field="*{password}"
               class="form-control"
       />
+      <p th:errors="*{password}" class="text-danger"
+         th:if="${#fields.hasErrors('password')}">
+      </p>
     </div>
     <div class="form-group">
       <label for="confirm-password">Confirm Password</label>
@@ -70,6 +79,9 @@
               th:field="*{confirmationPassword}"
               class="form-control"
       />
+      <p th:errors="*{confirmationPassword}" class="text-danger"
+         th:if="${#fields.hasErrors('confirmationPassword')}">
+      </p>
     </div>
 
     <a th:href="@{/login}"

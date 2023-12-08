@@ -156,29 +156,58 @@
               </div>
             </section>
 
-            <table class="table mt-3">
+            <table class="table table-rounded mt-3">
               <thead class="thead-light table-borderless">
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Task</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Due Date</th>
-                  <th scope="col">Status</th>
-                </tr>
+              <tr>
+                <th></th>
+                <th>Task</th>
+                <th>Category</th>
+                <th>Due Date</th>
+                <th>Status</th>
+                <th></th>
+              </tr>
               </thead>
-              <tbody class="table-borderles">
-                <tr>
-                  <td></td>
-                  <td></td>
-                  <td colspan="5" class="d-flex flex-column align-items-center">
-                    <img
-                      src="/images/empty/empty.png"
-                      width="242.5"
-                      height="228.234"
-                      alt="Empty State"
-                    />
-                    <p
-                      style="
+              <tbody>
+              <tr th:each="task: ${tasks}">
+                <td class="edit-cell">
+                  <form th:action="@{'/task/markAsCompleted/' + ${task.idTask}}" th:method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <input type="hidden" name="_method" value="put" />
+
+                  <a th:if="${task.status.equals('Completed')}">
+                    <button type="submit" class="hover-link trans-button">
+                    <img src="/icon/clipboard-tick-bold.svg" alt="Edit" class="edit-icon">
+                    </button>
+                  </a>
+                  <a th:if="${task.status.equals('Ongoing')}">
+                    <button type="submit" class="hover-link trans-button">
+                    <img src="/icon/clipboard-tick.svg" alt="Edit" class="edit-icon">
+                    </button>
+                  </a>
+                  <a th:if="${task.status.equals('Passed Due')}">
+                    <button type="submit" class="hover-link trans-button">
+                    <img src="/icon/clipboard-tick.svg" alt="Edit" class="edit-icon">
+                    </button>
+                  </a>
+                  </form>
+                </td>
+                <td th:text="${task.nama}">2</td>
+                <td>
+                  <div class="category-box" th:style="'background-color: ' + ${task.warnaKategori}" th:text="${task.kategori}">kategori</div>
+                </td>
+                <td th:text="${task.formattedDueDate2}"></td>
+                <td>
+                  <div class="status-circle" th:style="'background-color: ' + ${task.warnaStatus}"></div>
+                  <span class="status-text" th:text="${task.status}" th:style="'color: '+ ${task.warnaStatus}">Ongoing</span>
+                </td>
+                <td class="edit-cell">
+                  <img src="/icon/edit-task.svg" alt="Edit" class="edit-icon">
+                </td>
+              </tr>
+              <tr th:if="${#lists.isEmpty(tasks)}">
+                <td colspan="6" style="text-align: center;">
+                  <img src="/images/empty/empty.png" width="242.5" height="228.234" alt="Empty State" />
+                  <p style="
                         color: #c6c6c6;
 
                         font-family: Poppins;
@@ -186,14 +215,11 @@
                         font-style: normal;
                         font-weight: 500;
                         line-height: normal;
-                      "
-                    >
-                      You haven’t created any task
-                    </p>
-                  </td>
-                  <td></td>
-                  <td></td>
-                </tr>
+                      ">
+                    You haven’t created any task
+                  </p>
+                </td>
+              </tr>
               </tbody>
             </table>
           </div>

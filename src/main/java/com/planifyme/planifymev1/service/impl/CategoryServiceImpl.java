@@ -24,6 +24,12 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
+    public CategoryDto findById(int id) {
+        Category category = categoryRepository.findByIdCategory(id);
+        return convertModelToDto(category);
+    }
+
+    @Override
     public void saveCategory(CategoryDto categoryDto, String username) {
         Category category = new Category();
         category.setNama(categoryDto.getNama());
@@ -33,6 +39,7 @@ public class CategoryServiceImpl implements CategoryService {
         category.setUser(user);
         category.setImageUrl(categoryDto.getImageUrl());
         categoryRepository.save(category);
+
     }
 
     @Override
@@ -45,6 +52,7 @@ public class CategoryServiceImpl implements CategoryService {
 
     private CategoryDto convertModelToDto(Category category){
         CategoryDto categoryDto = new CategoryDto();
+        categoryDto.setIdCategory(category.getIdCategory());
         categoryDto.setNama(category.getNama());
         categoryDto.setDeskripsi(category.getDeskripsi());
         categoryDto.setImageUrl(category.getImageUrl());

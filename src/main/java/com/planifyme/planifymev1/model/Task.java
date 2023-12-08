@@ -32,4 +32,6 @@ public class Task {
 
     @Column(nullable = false)
     private LocalDate dueDate;
+
+    private boolean status;
 }

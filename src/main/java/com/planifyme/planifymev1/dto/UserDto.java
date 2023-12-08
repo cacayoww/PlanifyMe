@@ -1,9 +1,7 @@
 package com.planifyme.planifymev1.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.constraints.NotEmpty;
+import lombok.*;
 
 @Getter
 @Setter
@@ -11,12 +9,12 @@ import lombok.Setter;
 @AllArgsConstructor
 public class UserDto {
     private int idUser;
-
+    @NotEmpty
     private String namaLengkap;
-
+    @NotEmpty
     private String username;
-
+    @NotEmpty
     private String password;
-
+    @NotEmpty
     private String confirmationPassword;
 }

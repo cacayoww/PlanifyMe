@@ -13,8 +13,11 @@ import com.planifyme.planifymev1.service.CategoryService;
 import com.planifyme.planifymev1.service.ReminderService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -24,12 +27,11 @@ public class ReminderServiceImpl implements ReminderService {
     private ReminderRepository reminderRepository;
     private TaskRepository taskRepository;
 
-    private CategoryService categoryService;
 
-    public ReminderServiceImpl(ReminderRepository reminderRepository, TaskRepository taskRepository, CategoryService categoryService) {
+
+    public ReminderServiceImpl(ReminderRepository reminderRepository, TaskRepository taskRepository) {
         this.reminderRepository = reminderRepository;
         this.taskRepository = taskRepository;
-        this.categoryService = categoryService;
     }
 
     @Override
@@ -78,6 +80,22 @@ public class ReminderServiceImpl implements ReminderService {
         reminderDto.setImageUrl(reminder.getTask().getCategory().getImageUrl());
         reminderDto.setDueDate(reminder.getTask().getDueDate());
         reminderDto.setDateReminder(reminder.getDateReminder());
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
+        reminderDto.setFormattedDueDate(reminder.getTask().getDueDate().format(formatter));
+        long gapInDays = Math.abs(reminder.getDateReminder().toEpochDay() - LocalDate.now().toEpochDay());
+        if (gapInDays == 0){
+            reminderDto.setDateRemindertoNow("Today");
+        }else if (gapInDays == 1){
+            reminderDto.setDateRemindertoNow("a day ago");
+        }else if (gapInDays < 7){
+            reminderDto.setDateRemindertoNow(gapInDays+" days ago");
+        }else if (gapInDays < 14){
+            reminderDto.setDateRemindertoNow("a week ago");
+        } else {
+            int gap = (int) (gapInDays/7);
+            reminderDto.setDateRemindertoNow(gap+" weeks ago");
+        }
+
         return reminderDto;
     }
 

@@ -50,7 +50,7 @@ public class AuthController {
     public String registration(@Validated @ModelAttribute("user") UserDto userDto,
                                BindingResult result, Model model){
         User existingUser = userService.findUserByUsername(userDto.getUsername());
-        if(existingUser != null && existingUser.getUsername() != null && !existingUser.getUsername().isEmpty()){
+        if(existingUser != null){
             result.rejectValue("username", null,
                     "There is already an account registered with the same username");
         }

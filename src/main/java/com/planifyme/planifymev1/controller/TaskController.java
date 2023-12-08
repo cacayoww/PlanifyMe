@@ -14,10 +14,9 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -44,6 +43,9 @@ public class TaskController {
         model.addAttribute("user",user);
         List<CategoryDto> categories = categoryService.findCategoriesbyUser(user);
         model.addAttribute("categories",categories);
+        List<TaskDto> taskDtos = taskService.findTaskDtosbyUser(user);
+        taskDtos.sort(Comparator.comparing(TaskDto::getDueDate));
+        model.addAttribute("tasks",taskDtos);
 
         return "task";
     }
@@ -59,6 +61,12 @@ public class TaskController {
                 reminderService.saveReminder(reminderDto,task.getIdTask());
             }
         }
+        return "redirect:/task";
+    }
+
+    @PostMapping("/task/markAsCompleted/{id}")
+    public String markAsCompleted(@PathVariable("id") int id, Model model){
+        taskService.updateTaskStatus(id,true);
         return "redirect:/task";
     }
 }

@@ -100,6 +100,7 @@
             <div class="row">
 
               <div class="col-lg-4" th:each="category: ${categories}">
+                <a th:href="@{'/dashboard/category/' + ${category.idCategory}}" class="hover-link">
                 <div class="category-card" th:style="'background-color: ' + ${category.color}">
                   <img
                     th:src="${category.imageUrl}"
@@ -109,6 +110,7 @@
                   />
                   <h6 style="color: #ffffff" th:text="${category.nama}">nama</h6>
                 </div>
+                </a>
               </div>
 
               <div class="col-lg-4">

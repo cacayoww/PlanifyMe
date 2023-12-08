@@ -38,6 +38,7 @@ public class SpringSecurity {
                                 .requestMatchers("/icon/**").permitAll()
                                 .requestMatchers("/dashboard/**").hasRole("USER")
                                 .requestMatchers("/task/**").hasRole("USER")
+                                .requestMatchers("task/markAsCompleted/**").hasRole("USER")
                                 .requestMatchers("/reminder").hasRole("USER")
                                 .requestMatchers("/settings/**").hasRole("USER")
                                 .requestMatchers("/").hasRole("USER")

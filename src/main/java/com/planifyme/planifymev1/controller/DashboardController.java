@@ -1,20 +1,21 @@
 package com.planifyme.planifymev1.controller;
 
 import com.planifyme.planifymev1.dto.CategoryDto;
+import com.planifyme.planifymev1.dto.TaskDto;
 import com.planifyme.planifymev1.dto.UserDto;
 import com.planifyme.planifymev1.model.Category;
 import com.planifyme.planifymev1.model.User;
 import com.planifyme.planifymev1.service.CategoryService;
+import com.planifyme.planifymev1.service.TaskService;
 import com.planifyme.planifymev1.service.UserService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -22,11 +23,13 @@ public class DashboardController {
 
     private UserService userService;
     private CategoryService categoryService;
+    private TaskService taskService;
     private String image;
 
-    public DashboardController(UserService userService, CategoryService categoryService) {
+    public DashboardController(UserService userService, CategoryService categoryService, TaskService taskService) {
         this.userService = userService;
         this.categoryService = categoryService;
+        this.taskService = taskService;
     }
 
     @GetMapping("/dashboard")
@@ -68,5 +71,29 @@ public class DashboardController {
         model.addAttribute("category", categoryDto);
         return "redirect:/dashboard/addcategory?success";
     }
+
+    @GetMapping("/dashboard/category/{id}")
+    public String categoryDetails(@PathVariable("id") int id, Model model){
+        CategoryDto categoryDto = categoryService.findById(id);
+        List<TaskDto> tasks = taskService.findTasksbyCategory(id);
+        List<TaskDto> upcoming = new ArrayList<>();
+        List<TaskDto> today = new ArrayList<>();
+        List<TaskDto> completed = new ArrayList<>();
+        model.addAttribute("category",categoryDto);
+        for(TaskDto task: tasks){
+            if (task.getDueDate().isAfter(LocalDate.now())){
+                upcoming.add(task);
+            }else if (task.getDueDate().isEqual(LocalDate.now())) {
+                today.add(task);
+            }else if (task.getDueDate().isBefore(LocalDate.now())){
+                completed.add(task);
+            }
+        }
+        model.addAttribute("upcoming_tasks",upcoming);
+        model.addAttribute("today_tasks",today);
+        model.addAttribute("completed_tasks",completed);
+        return "category";
+    }
+
 
 }

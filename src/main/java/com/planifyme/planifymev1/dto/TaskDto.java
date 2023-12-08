@@ -16,5 +16,10 @@ public class TaskDto {
     private String nama;
     private String kategori;
     private LocalDate dueDate;
+    private String formattedDueDate;
+    private String formattedDueDate2;
     private String[] reminder = new String[4];
+    private String status;
+    private String warnaKategori;
+    private String warnaStatus;
 }

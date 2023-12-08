@@ -1,0 +1,80 @@
+.task-card {
+    margin-top: 20px;
+    /* height: 197px; */
+    border-radius: 8px 8px 8px 8px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    padding: 15px;
+}
+
+.task-img {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 20px;
+}
+
+.item-card {
+    /* Styles for the item card */
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    width: 100%; /* Adjust the width as needed */
+    height: 70px;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.item-card p {
+    /* Styles for paragraphs inside item-card */
+    color: #000000;
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+    /* Any other shared styles for the paragraphs */
+}
+
+.item-card p:nth-child(2) {
+    /* Styles for the second paragraph */
+    font-weight: bold;
+    /* Add any other styles specific to the second paragraph */
+}
+
+.item-card-past {
+    /* Styles for the item card */
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+    width: 100%; /* Adjust the width as needed */
+    height: 70px;
+    margin: 5px;
+    background-color: rgba(255, 255, 255, 0.75);
+}
+
+.item-card-past p {
+    /* Styles for paragraphs inside item-card */
+
+    font-family: 'Poppins', sans-serif;
+    font-size: 15px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+    /* Any other shared styles for the paragraphs */
+}
+
+.item-card-past p:nth-child(2) {
+    /* Styles for the second paragraph */
+    font-weight: bold;
+    /* Add any other styles specific to the second paragraph */
+}

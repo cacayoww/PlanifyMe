@@ -23,7 +23,6 @@ import java.util.List;
 public class ReminderController {
     private UserService userService;
     private TaskService taskService;
-
     private ReminderService reminderService;
 
     public ReminderController(UserService userService, TaskService taskService, ReminderService reminderService) {
@@ -34,8 +33,6 @@ public class ReminderController {
 
     @GetMapping("/reminder")
     public String reminder(Model model){
-
-
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(authentication.getName());
         model.addAttribute("user",user);
@@ -51,8 +48,7 @@ public class ReminderController {
                 }
             }
         }
-        reminders.sort(Comparator.comparing(ReminderDto::getDateReminder));
-
+        reminders.sort(Comparator.comparing(ReminderDto::getDateReminder).reversed());
         model.addAttribute("reminders", reminders);
         return "reminder";
     }
