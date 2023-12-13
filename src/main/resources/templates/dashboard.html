@@ -84,15 +84,31 @@
         <!-- Tengah -->
         <div class="col-lg-6">
           <section class="task">
-            <p class="title">Tasks <span>(next 7 days)</span></p>
-            <div class="empty-card">
-              <div class="d-flex justify-content-center">
+            <p class="title" style="margin-top: 20px">
+              Tasks <span>(next 7 days)</span>
+            </p>
+            <div class="card">
+              <div class="a-day-task" th:each="tasksADay: ${tasks7days}">
+                <div class="day-due">
+                  <p th:text="${tasksADay.get(0).formattedDueDate}">duedate</p>
+                </div>
+                <div class="card-task" th:each="task: ${tasksADay}">
+                  <img src="/icon/circle.svg" alt="o" />
+                  <p class="task-style" th:text="${task.nama}"></p>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center" th:if="${tasks7days.isEmpty()}">
                 <i class="fa-thin fa-calendar-lines empty-card-icon"></i>
               </div>
-              <h3 class="empty-task-title text-center">
+              <h3 class="empty-task-title text-center" th:if="${tasks7days.isEmpty()}">
                 start managing your task
               </h3>
             </div>
+
+
+
+
           </section>
 
           <section class="category">
@@ -147,7 +163,7 @@
           </div>
           <div class="sidebar-right">
             <div class="d-flex align-items-center flex-column">
-              <h3 class="progress-angka">0</h3>
+              <h3 class="progress-angka" th:text="${progress}">progress</h3>
               <p class="progress-title">overall progress</p>
             </div>
             <div class="progress">
@@ -155,13 +171,15 @@
                 class="progress-bar custom-progress-bar"
                 role="progressbar"
                 style="width: 0%"
-                aria-valuenow="0"
+                th:attr="style='width: ' + ${progress} + '%;'"
+                aria-valuenow="${progress}"
                 aria-valuemin="0"
                 aria-valuemax="100"
               ></div>
             </div>
             <h1 class="title-for-task">Today's Task</h1>
-            <p class="text-empty-task">You have no task today</p>
+            <p th:each="task: ${tasksToday}" class="text-non-empty-task" th:text="${task.nama}">nama</p>
+            <p th:if="${tasksToday.isEmpty()}" class="text-empty-task">You have no task today</p>
           </div>
         </div>
         <!-- End Sidebar kanan -->

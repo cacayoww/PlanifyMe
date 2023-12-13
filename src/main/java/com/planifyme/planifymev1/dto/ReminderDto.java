@@ -14,20 +14,12 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ReminderDto {
     private int idReminder;
-
     private String namaUser;
-
     private String namaTask;
-
     private String namaKategori;
-
     private String formattedDueDate;
-
     private String dateRemindertoNow;
-
     private LocalDate dateReminder;
-
     private LocalDate dueDate;
-
     private String imageUrl;
 }

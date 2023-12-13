@@ -44,11 +44,16 @@ public class ReminderServiceImpl implements ReminderService {
     }
 
     @Override
-    public List<ReminderDto> findAllReminders(Task task) {
+    public List<ReminderDto> findAllReminderDtos(Task task) {
         List<Reminder> reminders = reminderRepository.findAllByTask(task);
 
         return reminders.stream().map(this::convertModeltoDto)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Reminder> findAllReminders(Task task) {
+        return reminderRepository.findAllByTask(task);
     }
 
     @Override

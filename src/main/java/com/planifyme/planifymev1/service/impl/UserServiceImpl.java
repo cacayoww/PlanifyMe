@@ -36,7 +36,15 @@ public class UserServiceImpl implements UserService {
     public User findUserByUsername(String username) {
         return userRepository.findByUsername(username);
     }
-    
+
+    @Override
+    public void editUser(UserDto userDto, String username) {
+        User user = findUserByUsername(username);
+        user.setNamaLengkap(userDto.getNamaLengkap());
+        user.setPassword(passwordEncoder.encode(userDto.getNewPassword()));
+        userRepository.save(user);
+    }
+
 }
 
 

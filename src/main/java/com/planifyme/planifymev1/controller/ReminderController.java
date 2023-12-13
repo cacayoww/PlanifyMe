@@ -41,7 +41,7 @@ public class ReminderController {
         List<ReminderDto> taskReminders;
         List<ReminderDto> reminders = new ArrayList<>();
         for (Task task: tasks){
-            taskReminders = reminderService.findAllReminders(task);
+            taskReminders = reminderService.findAllReminderDtos(task);
             for (ReminderDto reminder: taskReminders) {
                 if (reminder.getDateReminder().isBefore(datenow) || reminder.getDateReminder().isEqual(datenow)) {
                     reminders.add(reminder);

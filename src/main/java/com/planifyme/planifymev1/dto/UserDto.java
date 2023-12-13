@@ -9,12 +9,16 @@ import lombok.*;
 @AllArgsConstructor
 public class UserDto {
     private int idUser;
-    @NotEmpty
+    @NotEmpty(message = "Nama Lengkap must not be empty")
     private String namaLengkap;
-    @NotEmpty
+    @NotEmpty(message = "Username must not be empty")
     private String username;
-    @NotEmpty
+    @NotEmpty(message = "Password must not be empty")
     private String password;
-    @NotEmpty
+    @NotEmpty(message = "Confirmation Password must not be empty")
     private String confirmationPassword;
+    @NotEmpty(message = "Old Password must not be empty")
+    private String oldPassword;
+    @NotEmpty(message = "New Password must not be empty")
+    private String newPassword;
 }

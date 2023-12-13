@@ -1,10 +1,13 @@
 package com.planifyme.planifymev1.service.impl;
 
+import com.planifyme.planifymev1.dto.ReminderDto;
 import com.planifyme.planifymev1.dto.TaskDto;
 import com.planifyme.planifymev1.model.Category;
+import com.planifyme.planifymev1.model.Reminder;
 import com.planifyme.planifymev1.model.Task;
 import com.planifyme.planifymev1.model.User;
 import com.planifyme.planifymev1.repository.CategoryRepository;
+import com.planifyme.planifymev1.repository.ReminderRepository;
 import com.planifyme.planifymev1.repository.TaskRepository;
 import com.planifyme.planifymev1.repository.UserRepository;
 import com.planifyme.planifymev1.service.TaskService;
@@ -22,11 +25,16 @@ public class TaskServiceImpl implements TaskService {
     private TaskRepository taskRepository;
     private UserRepository userRepository;
     private CategoryRepository categoryRepository;
+    private ReminderRepository reminderRepository;
 
-    public TaskServiceImpl(TaskRepository taskRepository, UserRepository userRepository, CategoryRepository categoryRepository) {
+    public TaskServiceImpl(TaskRepository taskRepository,
+                           UserRepository userRepository,
+                           CategoryRepository categoryRepository,
+                           ReminderRepository reminderRepository) {
         this.taskRepository = taskRepository;
         this.userRepository = userRepository;
         this.categoryRepository = categoryRepository;
+        this.reminderRepository =reminderRepository;
     }
 
     @Override
@@ -62,7 +70,7 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTaskStatus(int taskId, boolean newStatus) {
+    public Task updateTaskStatus(int taskId) {
         Task task = taskRepository.findByIdTask(taskId);
         task.setStatus(!task.isStatus());
         taskRepository.save(task);
@@ -70,12 +78,48 @@ public class TaskServiceImpl implements TaskService {
         return task;
     }
 
+    @Override
+    public Task updateTaskValues(int taskId, TaskDto newTask) {
+        Task task = taskRepository.findByIdTask(taskId);
+        if (!task.getNama().equals(newTask.getNama())){
+            task.setNama(newTask.getNama());
+        }
+        if (!task.getDueDate().equals(newTask.getDueDate())){
+            reminderRepository.deleteByTask(task);
+            task.setDueDate(newTask.getDueDate());
+        }
+        if (!task.getCategory().getNama().equals(newTask.getKategori())){
+            Category category = categoryRepository.findByNamaAndUser(newTask.getKategori(),task.getUser());
+            task.setCategory(category);
+        }
+        Task savedTask = taskRepository.save(task);
+        return savedTask;
+    }
+
+
     private TaskDto convertModeltoDto(Task task){
         TaskDto taskDto = new TaskDto();
         taskDto.setIdTask(task.getIdTask());
         taskDto.setNama(task.getNama());
         taskDto.setKategori(task.getCategory().getNama());
         taskDto.setDueDate(task.getDueDate());
+        List<Reminder> reminders = reminderRepository.findAllByTask(task);
+        String[] remindersString = new String[4];
+        for (Reminder reminder: reminders){
+            if (reminder.getDateReminder().equals(task.getDueDate().minusWeeks(1))){
+                remindersString[0] = "a week before";
+            }
+            if (reminder.getDateReminder().equals(task.getDueDate().minusDays(3))){
+                remindersString[1] = "three days before";
+            }
+            if (reminder.getDateReminder().equals(task.getDueDate().minusDays(1))){
+                remindersString[2] = "a day before";
+            }
+            if (reminder.getDateReminder().equals(task.getDueDate())){
+                remindersString[3] = "on the day";
+            }
+        }
+        taskDto.setReminder(remindersString);
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy", Locale.ENGLISH);
         DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("E, dd MMMM yyyy", Locale.ENGLISH);
         taskDto.setFormattedDueDate(task.getDueDate().format(formatter));

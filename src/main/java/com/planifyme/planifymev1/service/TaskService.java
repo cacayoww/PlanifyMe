@@ -18,6 +18,8 @@ public interface TaskService {
     List<TaskDto> findTaskDtosbyUser(User user);
 
     List<TaskDto> findTasksbyCategory(int idCategory);
-    Task updateTaskStatus(int taskId, boolean newStatus);
+    Task updateTaskStatus(int taskId);
+
+    Task updateTaskValues(int taskId, TaskDto newTask);
 
 }

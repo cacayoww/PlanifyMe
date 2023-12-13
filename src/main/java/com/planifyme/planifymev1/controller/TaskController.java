@@ -4,6 +4,7 @@ import com.planifyme.planifymev1.dto.CategoryDto;
 import com.planifyme.planifymev1.dto.ReminderDto;
 import com.planifyme.planifymev1.dto.TaskDto;
 import com.planifyme.planifymev1.model.Category;
+import com.planifyme.planifymev1.model.Reminder;
 import com.planifyme.planifymev1.model.Task;
 import com.planifyme.planifymev1.model.User;
 import com.planifyme.planifymev1.service.CategoryService;
@@ -66,7 +67,21 @@ public class TaskController {
 
     @PostMapping("/task/markAsCompleted/{id}")
     public String markAsCompleted(@PathVariable("id") int id, Model model){
-        taskService.updateTaskStatus(id,true);
+        taskService.updateTaskStatus(id);
         return "redirect:/task";
     }
+
+    @PostMapping("task/update/{id}")
+    public String updateTask(@PathVariable int id,@ModelAttribute TaskDto taskDto) {
+        Task task = taskService.updateTaskValues(id, taskDto);
+        for(int i=0;i<4;i++){
+
+            if (taskDto.getReminder()[i] != null){
+                ReminderDto reminderDto = reminderService.createReminder(task.getUser(),task,i);
+                reminderService.saveReminder(reminderDto,task.getIdTask());
+            }
+        }
+        return "redirect:/task";
+    }
+
 }

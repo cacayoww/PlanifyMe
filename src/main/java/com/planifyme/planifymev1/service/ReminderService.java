@@ -2,6 +2,7 @@ package com.planifyme.planifymev1.service;
 
 import com.planifyme.planifymev1.dto.ReminderDto;
 import com.planifyme.planifymev1.dto.TaskDto;
+import com.planifyme.planifymev1.model.Reminder;
 import com.planifyme.planifymev1.model.Task;
 import com.planifyme.planifymev1.model.User;
 import org.springframework.stereotype.Service;
@@ -12,7 +13,9 @@ import java.util.List;
 public interface ReminderService {
     void saveReminder(ReminderDto reminderDto, int idTask);
 
-    List<ReminderDto> findAllReminders(Task task);
+    List<ReminderDto> findAllReminderDtos(Task task);
+
+    List<Reminder> findAllReminders(Task task);
 
     ReminderDto createReminder(User user, Task task, int keterangan);
 }

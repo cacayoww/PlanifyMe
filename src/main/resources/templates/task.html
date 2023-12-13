@@ -173,7 +173,6 @@
                   <form th:action="@{'/task/markAsCompleted/' + ${task.idTask}}" th:method="post">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <input type="hidden" name="_method" value="put" />
-
                   <a th:if="${task.status.equals('Completed')}">
                     <button type="submit" class="hover-link trans-button">
                     <img src="/icon/clipboard-tick-bold.svg" alt="Edit" class="edit-icon">
@@ -201,7 +200,12 @@
                   <span class="status-text" th:text="${task.status}" th:style="'color: '+ ${task.warnaStatus}">Ongoing</span>
                 </td>
                 <td class="edit-cell">
-                  <img src="/icon/edit-task.svg" alt="Edit" class="edit-icon">
+                  <form id="editForm" th:action="@{'/task/update/' + ${task.idTask}}" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button type="button" class="trans-button edit-link" th:data-taskid="${task.idTask}" th:attr="data-target=${'#editModal-' + task.idTask}" data-toggle="modal">
+                      <img src="/icon/edit-task.svg" alt="Edit" class="edit-icon">
+                    </button>
+                  </form>
                 </td>
               </tr>
               <tr th:if="${#lists.isEmpty(tasks)}">
@@ -222,6 +226,66 @@
               </tr>
               </tbody>
             </table>
+            <div th:each="task: ${tasks}">
+              <div th:id="'editModal-' + ${task.idTask}" class="modal fade">
+              <div class="modal-dialog modal-dialog-centered modal-custom-size" role="document">
+                <div class="modal-content">
+                    <div class="modal-body ">
+                      <button type="button" class="btn btn-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true" style="font-size: 1.5rem;">&times;</span>
+                      </button>
+                      <form th:action="@{'/task/update/' + ${task.idTask}}" th:object="${taskDto}" method="post">
+                      <div class="form-group row">
+                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                        <label th:for="${task.nama}" class="col-sm-2 col-form-label">Task Name</label>
+                        <div class="col-sm-4">
+                          <input type="text" class="form-control" name="nama" th:id="${task.nama}" th:value="${task.nama}">
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label th:for="${task.kategori}" class="col-sm-2 col-form-label">Category</label>
+                        <div class="col-sm-4">
+                          <select th:id="${task.kategori}" name="kategori" class="form-select h-100 col-sm-12 custom-border custom-input">
+                            <option th:each="category: ${categories}" th:value="${category.nama}"
+                                    th:text="${category.nama}" th:selected="${category.nama eq task.kategori}">nama</option>
+                          </select>
+                        </div>
+                        <label th:for="${task.dueDate}" class="col-sm-2 col-form-label">Due Date</label>
+                        <div class="col-sm-4">
+                          <input type="date" class="form-control" th:id="${task.dueDate}" name="dueDate" th:value="${task.dueDate}">
+                        </div>
+                      </div>
+                      <p>Reminder</p>
+                      <div class="form-group row">
+                        <div class="col-sm-3">
+                          <input type="checkbox" id="reminder1-new" name="reminder[0]" th:checked="${not #strings.isEmpty(task.reminder[0])}" >
+                          <label for="reminder1"> a week before</label><br>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" id="reminder2-new" name="reminder[1]" th:checked="${not #strings.isEmpty(task.reminder[1])}" >
+                          <label for="reminder2"> three days before</label><br>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" id="reminder3-new" name="reminder[2]" th:checked="${not #strings.isEmpty(task.reminder[2])}">
+                          <label for="reminder3"> a day before</label><br>
+                        </div>
+                        <div class="col-sm-3">
+                          <input type="checkbox" id="reminder4-new" name="reminder[3]" th:checked="${not #strings.isEmpty(task.reminder[3])}">
+                          <label for="reminder4"> on the day</label><br>
+                        </div>
+
+                      </div>
+                      <div class="modal-att">
+                        <button type="submit" class="btn button btn-dark custom-btn">
+                          Save
+                        </button>
+                      </div>
+                      </form>
+                    </div>
+                </div>
+              </div>
+            </div>
+            </div>
           </div>
         </div>
         <!-- End Tengah -->

@@ -11,6 +11,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -55,9 +56,20 @@ public class AuthController {
                     "There is already an account registered with the same username");
         }
 
-        if(result.hasErrors()){
-            model.addAttribute("user", userDto);
-            return "/register";
+        if (userDto.getPassword()!=null && userDto.getConfirmationPassword()!=null) {
+            if (!userDto.getPassword().equals(userDto.getConfirmationPassword())) {
+                result.rejectValue("confirmationPassword", null,
+                        "The confirmation password does not match with Password");
+            }
+        }
+        for (ObjectError error : result.getAllErrors()) {
+            if (!(error.getDefaultMessage().equals("Confirmation Password must not be empty") ||
+                    error.getDefaultMessage().equals("Old Password must not be empty") ||
+                    error.getDefaultMessage().equals("New Password must not be empty"))){
+                model.addAttribute("user", userDto);
+                return "/register";
+
+            }
         }
 
         System.out.println(userDto.getUsername());
@@ -72,7 +84,6 @@ public class AuthController {
         categoryService.saveCategory(parttime,userDto.getUsername());
         categoryService.saveCategory(relax,userDto.getUsername());
         return "redirect:/register?success";
-
 
     }
 
