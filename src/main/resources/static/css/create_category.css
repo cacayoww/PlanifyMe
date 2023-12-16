@@ -109,3 +109,13 @@ input[type="radio"]:checked + label img {
 input[type="radio"]:checked ~ .selected-image img {
   display: block;
 }
+
+.trans-button {
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.trans-button:focus {
+  outline: none; /* Optional: Remove focus outline */
+}

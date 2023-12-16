@@ -102,17 +102,22 @@
 
 .table th:nth-child(4),
 .table td:nth-child(4) {
-  width: 23%; /* Set width for the fourth column */
+  width: 22%; /* Set width for the fourth column */
 }
 
 .table th:nth-child(5),
 .table td:nth-child(5) {
-  width: 19%; /* Set width for the fifth column */
+  width: 18%; /* Set width for the fifth column */
 }
 
 .table th:nth-child(6),
 .table td:nth-child(6) {
-  width: 8%; /* Set width for the sixth column */
+  width: 5%; /* Set width for the sixth column */
+}
+
+.table th:nth-child(7),
+.table td:nth-child(7) {
+  width: 5%; /* Set width for the sixth column */
 }
 
 .category-box {

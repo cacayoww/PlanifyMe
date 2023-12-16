@@ -10,6 +10,5 @@ import java.util.List;
 public interface UserService {
     void saveUser(UserDto userDto);
     User findUserByUsername(String username);
-
     void editUser(UserDto userDto, String username);
 }

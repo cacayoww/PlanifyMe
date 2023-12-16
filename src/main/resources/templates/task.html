@@ -165,6 +165,7 @@
                 <th>Due Date</th>
                 <th>Status</th>
                 <th></th>
+                <th></th>
               </tr>
               </thead>
               <tbody>
@@ -204,6 +205,13 @@
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <button type="button" class="trans-button edit-link" th:data-taskid="${task.idTask}" th:attr="data-target=${'#editModal-' + task.idTask}" data-toggle="modal">
                       <img src="/icon/edit-task.svg" alt="Edit" class="edit-icon">
+                    </button>
+                  </form>
+                </td>
+                <td class="edit-cell">
+                  <form th:action="@{'/task/delete/' + ${task.idTask}}" th:method="post">
+                    <button type="submit" class="hover-link trans-button">
+                      <img src="/icon/trash.svg" alt="Edit" class="edit-icon">
                     </button>
                   </form>
                 </td>

@@ -75,12 +75,17 @@ public class TaskController {
     public String updateTask(@PathVariable int id,@ModelAttribute TaskDto taskDto) {
         Task task = taskService.updateTaskValues(id, taskDto);
         for(int i=0;i<4;i++){
-
             if (taskDto.getReminder()[i] != null){
                 ReminderDto reminderDto = reminderService.createReminder(task.getUser(),task,i);
                 reminderService.saveReminder(reminderDto,task.getIdTask());
             }
         }
+        return "redirect:/task";
+    }
+
+    @PostMapping("/task/delete/{id}")
+    public String deleteTask(@PathVariable("id") int id, Model model){
+        taskService.deleteTask(id);
         return "redirect:/task";
     }
 

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 import java.util.stream.Collectors;
@@ -79,10 +80,37 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
+    public void deleteTask(int idTask) {
+        Task task = taskRepository.findByIdTask(idTask);
+        reminderRepository.deleteByTask(task);
+        taskRepository.deleteByIdTask(idTask);
+    }
+
+    @Override
     public Task updateTaskValues(int taskId, TaskDto newTask) {
         Task task = taskRepository.findByIdTask(taskId);
         if (!task.getNama().equals(newTask.getNama())){
             task.setNama(newTask.getNama());
+        }
+        LocalDate[] dateReminders = new LocalDate[4];
+        if (newTask.getReminder()[0] != null){
+            dateReminders[0] = (newTask.getDueDate().minusWeeks(1));
+        }else if (newTask.getReminder()[1] != null){
+            dateReminders[1] = (newTask.getDueDate().minusDays(3));
+        }else if (newTask.getReminder()[2] != null){
+            dateReminders[2] = (newTask.getDueDate().minusDays(1));
+        }else if (newTask.getReminder()[3] != null){
+            dateReminders[3] = (newTask.getDueDate());
+        }
+        List<Reminder> reminders = reminderRepository.findAllByTask(task);
+        for (Reminder r: reminders){
+            if (r.getDateReminder() != dateReminders[0] &&
+                    r.getDateReminder() != dateReminders[1] &&
+                    r.getDateReminder() != dateReminders[2] &&
+                    r.getDateReminder() != dateReminders[3]){
+                reminderRepository.deleteByTask(task);
+                break;
+            }
         }
         if (!task.getDueDate().equals(newTask.getDueDate())){
             reminderRepository.deleteByTask(task);

@@ -20,6 +20,8 @@ public interface TaskService {
     List<TaskDto> findTasksbyCategory(int idCategory);
     Task updateTaskStatus(int taskId);
 
+    void deleteTask(int idTask);
+
     Task updateTaskValues(int taskId, TaskDto newTask);
 
 }

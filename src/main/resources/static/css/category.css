@@ -25,7 +25,7 @@
     margin-top: 20px;
     border-radius: 5px;
     width: 100%; /* Adjust the width as needed */
-    height: 70px;
+    height: auto;
     margin: 5px;
     background-color: rgba(255, 255, 255, 0.75);
 }
@@ -77,4 +77,17 @@
     /* Styles for the second paragraph */
     font-weight: bold;
     /* Add any other styles specific to the second paragraph */
+}
+
+/* Style to make input field look like a large text field */
+.input-like-textarea {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    line-height: 1.5;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: 'Arial', sans-serif; /* Use a font similar to a textarea */
+    font-size: 14px; /* Adjust font size as needed */
+    height: 120px; /* Set the height to display multiple lines of text */
 }

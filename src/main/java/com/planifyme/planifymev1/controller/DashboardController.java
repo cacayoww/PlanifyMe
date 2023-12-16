@@ -130,7 +130,29 @@ public class DashboardController {
     }
 
     @GetMapping("/dashboard/category/{id}")
-    public String categoryDetails(@PathVariable("id") int id, Model model){
+    public String categoryDetails(@PathVariable("id") int id, Model model) {
+         prepareCategoryView(id, model);
+         return "category";
+    }
+
+    @GetMapping("/dashboard/category/edit/{id}")
+    public String editCategory(@PathVariable("id") int id, Model model) {
+        prepareCategoryView(id, model);
+        return "edit_category";
+    }
+
+    @PostMapping("/dashboard/category/edit/save/{id}")
+    public String editCategoryValues(@PathVariable("id") int id, @ModelAttribute CategoryDto categoryDto) {
+        categoryService.updateCategoryValues(id,categoryDto);
+        return "redirect:/dashboard/category/edit/{id}?success";
+    }
+
+    @PostMapping("/dashboard/category/delete/{id}")
+    public String deleteTask(@PathVariable("id") int id, Model model){
+        categoryService.deleteCategory(id);
+        return "redirect:/dashboard";
+    }
+    private void prepareCategoryView(int id, Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         User user = userService.findUserByUsername(authentication.getName());
         CategoryDto categoryDto = categoryService.findById(id);
@@ -138,28 +160,28 @@ public class DashboardController {
         List<TaskDto> upcoming = new ArrayList<>();
         List<TaskDto> today = new ArrayList<>();
         List<TaskDto> completed = new ArrayList<>();
-        model.addAttribute("category",categoryDto);
-        for(TaskDto task: tasks){
-            if (task.getDueDate().isAfter(LocalDate.now())){
+        model.addAttribute("category", categoryDto);
+        for (TaskDto task : tasks) {
+            if (task.getDueDate().isAfter(LocalDate.now())) {
                 upcoming.add(task);
-            }else if (task.getDueDate().isEqual(LocalDate.now())) {
+            } else if (task.getDueDate().isEqual(LocalDate.now())) {
                 today.add(task);
-            }else if (task.getDueDate().isBefore(LocalDate.now())){
+            } else if (task.getDueDate().isBefore(LocalDate.now())) {
                 completed.add(task);
             }
         }
         int num_task = tasks.size();
-        int num_task_completed = tasks.stream().filter(e->e.getStatus().equals("Completed")).toList().size();
-        if (num_task==0){
-            num_task=1;
+        int num_task_completed = tasks.stream().filter(e -> e.getStatus().equals("Completed")).toList().size();
+        if (num_task == 0) {
+            num_task = 1;
         }
-        model.addAttribute("progress",(num_task_completed*100/num_task));
-        model.addAttribute("user",user);
-        model.addAttribute("upcoming_tasks",upcoming);
-        model.addAttribute("today_tasks",today);
-        model.addAttribute("completed_tasks",completed);
-        return "category";
+        model.addAttribute("progress", (num_task_completed * 100 / num_task));
+        model.addAttribute("user", user);
+        model.addAttribute("upcoming_tasks", upcoming);
+        model.addAttribute("today_tasks", today);
+        model.addAttribute("completed_tasks", completed);
     }
+
 
 
 }

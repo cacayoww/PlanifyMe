@@ -15,4 +15,8 @@ public interface CategoryService {
     void saveCategory(CategoryDto categoryDto, String username);
 
     List<CategoryDto> findCategoriesbyUser(User user);
+
+    Category updateCategoryValues(int idCategory, CategoryDto categoryDto);
+
+    void deleteCategory(int idCategory);
 }
