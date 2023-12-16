@@ -148,10 +148,10 @@ public class TaskServiceImpl implements TaskService {
             }
         }
         taskDto.setReminder(remindersString);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy", Locale.ENGLISH);
-        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("E, dd MMMM yyyy", Locale.ENGLISH);
-        taskDto.setFormattedDueDate(task.getDueDate().format(formatter));
-        taskDto.setFormattedDueDate2(task.getDueDate().format(formatter2));
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy", Locale.ENGLISH);
+//        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("E, dd MMMM yyyy", Locale.ENGLISH);
+//        taskDto.setFormattedDueDate(task.getDueDate().format(formatter));
+//        taskDto.setFormattedDueDate2(task.getDueDate().format(formatter2));
         if (!task.isStatus() && LocalDate.now().isAfter(task.getDueDate())){
             taskDto.setStatus("Passed Due");
             taskDto.setWarnaStatus("#F01515");

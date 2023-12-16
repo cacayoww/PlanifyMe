@@ -45,6 +45,7 @@ public class TaskController {
         List<CategoryDto> categories = categoryService.findCategoriesbyUser(user);
         model.addAttribute("categories",categories);
         List<TaskDto> taskDtos = taskService.findTaskDtosbyUser(user);
+        taskDtos.forEach(t->t.formatDate("E, dd MMMM yyyy"));
         taskDtos.sort(Comparator.comparing(TaskDto::getDueDate));
         model.addAttribute("tasks",taskDtos);
 

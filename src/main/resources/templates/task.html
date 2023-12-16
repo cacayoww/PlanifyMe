@@ -195,7 +195,7 @@
                 <td>
                   <div class="category-box" th:style="'background-color: ' + ${task.warnaKategori}" th:text="${task.kategori}">kategori</div>
                 </td>
-                <td th:text="${task.formattedDueDate2}"></td>
+                <td th:text="${task.formattedDueDate}"></td>
                 <td>
                   <div class="status-circle" th:style="'background-color: ' + ${task.warnaStatus}"></div>
                   <span class="status-text" th:text="${task.status}" th:style="'color: '+ ${task.warnaStatus}">Ongoing</span>
@@ -203,14 +203,17 @@
                 <td class="edit-cell">
                   <form id="editForm" th:action="@{'/task/update/' + ${task.idTask}}" method="post">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-                    <button type="button" class="trans-button edit-link" th:data-taskid="${task.idTask}" th:attr="data-target=${'#editModal-' + task.idTask}" data-toggle="modal">
+                    <button type="button" class="trans-button edit-link" th:data-taskid="${task.idTask}"
+                            th:attr="data-target=${'#editModal-' + task.idTask}" data-toggle="modal">
                       <img src="/icon/edit-task.svg" alt="Edit" class="edit-icon">
                     </button>
                   </form>
                 </td>
                 <td class="edit-cell">
-                  <form th:action="@{'/task/delete/' + ${task.idTask}}" th:method="post">
-                    <button type="submit" class="hover-link trans-button">
+                  <form id="deleteForm" th:action="@{'/task/delete/' + ${task.idTask}}" th:method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <button type="button" class="hover-link trans-button" th:data-taskid="${task.idTask}"
+                            th:attr="data-target=${'#deleteModal-' + task.idTask}" data-toggle="modal">
                       <img src="/icon/trash.svg" alt="Edit" class="edit-icon">
                     </button>
                   </form>
@@ -293,6 +296,31 @@
                 </div>
               </div>
             </div>
+            </div>
+            <div th:each="task: ${tasks}">
+              <div th:id="'deleteModal-' + ${task.idTask}" class="modal fade">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <form th:action="@{'/task/delete/' + ${task.idTask}}" method="post">
+                      <div class="modal-body">
+                        <p th:text="'Do you want to delete Task `'+${task.nama}+'`?'"></p>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary" style="background-color: #000000">
+                          Yes
+                        </button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+
             </div>
           </div>
         </div>

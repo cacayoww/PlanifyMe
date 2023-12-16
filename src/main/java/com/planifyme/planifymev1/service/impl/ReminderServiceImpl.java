@@ -85,8 +85,8 @@ public class ReminderServiceImpl implements ReminderService {
         reminderDto.setImageUrl(reminder.getTask().getCategory().getImageUrl());
         reminderDto.setDueDate(reminder.getTask().getDueDate());
         reminderDto.setDateReminder(reminder.getDateReminder());
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
-        reminderDto.setFormattedDueDate(reminder.getTask().getDueDate().format(formatter));
+//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", Locale.ENGLISH);
+//        reminderDto.setFormattedDueDate(reminder.getTask().getDueDate().format(formatter));
         long gapInDays = Math.abs(reminder.getDateReminder().toEpochDay() - LocalDate.now().toEpochDay());
         if (gapInDays == 0){
             reminderDto.setDateRemindertoNow("Today");

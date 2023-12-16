@@ -43,6 +43,7 @@ public class ReminderController {
         for (Task task: tasks){
             taskReminders = reminderService.findAllReminderDtos(task);
             for (ReminderDto reminder: taskReminders) {
+                reminder.formatDate("dd MMMM yyyy");
                 if (reminder.getDateReminder().isBefore(datenow) || reminder.getDateReminder().isEqual(datenow)) {
                     reminders.add(reminder);
                 }

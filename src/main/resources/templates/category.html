@@ -133,18 +133,41 @@
                     </div>
                     <div class="col-lg-11">
                         <div class="d-flex justify-content-end">
-                            <a th:href="@{'/dashboard/category/edit/' + ${category.idCategory}}" class="hover-link">
-                                <p>edit         </p>
-                            </a>
-                            <form th:action="@{'/dashboard/category/delete/' + ${category.idCategory}}" method="post">
-                                <button type="submit" class="trans-button hover-link" >
-                                    delete
+                            <a th:href="@{'/dashboard/category/edit/' + ${category.idCategory}}" >
+                                <button class="trans-button hover-link" style="margin-right: 10px; color: #a09f9f" >
+                                    edit
                                 </button>
-                            </form>
+                            </a>
+                            <button class="trans-button hover-link" style="color: #a09f9f"
+                                    data-toggle="modal" data-target="#deletemodal">
+                                delete
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
+            <div class="modal fade" id="deletemodal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">Message</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form th:action="@{'/dashboard/category/delete/' + ${category.idCategory}}" method="post">
+                            <div class="modal-body">
+                                <p th:text="'Do you want to delete Category `'+${category.nama}+'` and ALL of it tasks?'"></p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="submit" class="btn btn-primary" style="background-color: #000000">
+                                    Yes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
             <section class="category">
                 <p class="title">Tasks</p>
                 <div class="row">

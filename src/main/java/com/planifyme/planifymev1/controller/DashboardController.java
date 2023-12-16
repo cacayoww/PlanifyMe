@@ -51,6 +51,7 @@ public class DashboardController {
         List<TaskDto> five= new ArrayList<>();
         List<TaskDto> six= new ArrayList<>();
         for (TaskDto t: taskDtos){
+            t.formatDate("E, dd MMM yyyy");
             if (t.getDueDate().equals(LocalDate.now())) {
                 now.add(t);
             }else if (t.getDueDate().equals(LocalDate.now().plusDays(1))){
@@ -162,6 +163,7 @@ public class DashboardController {
         List<TaskDto> completed = new ArrayList<>();
         model.addAttribute("category", categoryDto);
         for (TaskDto task : tasks) {
+            task.formatDate("E, dd MMM yyyy");
             if (task.getDueDate().isAfter(LocalDate.now())) {
                 upcoming.add(task);
             } else if (task.getDueDate().isEqual(LocalDate.now())) {
