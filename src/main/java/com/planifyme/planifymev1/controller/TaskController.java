@@ -11,6 +11,9 @@ import com.planifyme.planifymev1.service.CategoryService;
 import com.planifyme.planifymev1.service.ReminderService;
 import com.planifyme.planifymev1.service.TaskService;
 import com.planifyme.planifymev1.service.UserService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
+import jakarta.transaction.Transactional;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -27,6 +30,9 @@ public class TaskController {
     private CategoryService categoryService;
     private TaskService taskService;
     private ReminderService reminderService;
+
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public TaskController(UserService userService, CategoryService categoryService, TaskService taskService, ReminderService reminderService) {
         this.userService = userService;
@@ -71,13 +77,17 @@ public class TaskController {
         taskService.updateTaskStatus(id);
         return "redirect:/task";
     }
-
+    @Transactional
     @PostMapping("task/update/{id}")
     public String updateTask(@PathVariable int id,@ModelAttribute TaskDto taskDto) {
-        Task task = taskService.updateTaskValues(id, taskDto);
+        taskService.updateTaskValues(id, taskDto);
+        Task task = entityManager.find(Task.class, id);
+        entityManager.refresh(task);
         for(int i=0;i<4;i++){
             if (taskDto.getReminder()[i] != null){
+                System.out.println(i);
                 ReminderDto reminderDto = reminderService.createReminder(task.getUser(),task,i);
+                System.out.println(task.getNama());
                 reminderService.saveReminder(reminderDto,task.getIdTask());
             }
         }

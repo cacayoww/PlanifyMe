@@ -13,11 +13,9 @@ import lombok.Setter;
 @Entity
 @Table(name = "category")
 public class Category {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCategory;
-
     @ManyToOne
     @JoinColumn(name = "idUser")
     private User user;
@@ -25,6 +23,4 @@ public class Category {
     private String deskripsi;
     private String color;
     private String imageUrl;
-
-
 }

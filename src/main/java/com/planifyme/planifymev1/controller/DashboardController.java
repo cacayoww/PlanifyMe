@@ -2,8 +2,6 @@ package com.planifyme.planifymev1.controller;
 
 import com.planifyme.planifymev1.dto.CategoryDto;
 import com.planifyme.planifymev1.dto.TaskDto;
-import com.planifyme.planifymev1.dto.UserDto;
-import com.planifyme.planifymev1.model.Category;
 import com.planifyme.planifymev1.model.User;
 import com.planifyme.planifymev1.service.CategoryService;
 import com.planifyme.planifymev1.service.TaskService;
@@ -16,16 +14,14 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Controller
 public class DashboardController {
 
-    private UserService userService;
-    private CategoryService categoryService;
-    private TaskService taskService;
+    private final UserService userService;
+    private final CategoryService categoryService;
+    private final TaskService taskService;
     private String image;
 
     public DashboardController(UserService userService, CategoryService categoryService, TaskService taskService) {
@@ -36,8 +32,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard")
     public String dashboard(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(authentication.getName());
+        User user = getAuthenticatedUser();
         List<CategoryDto> categories = categoryService.findCategoriesbyUser(user);
         model.addAttribute("user",user);
         model.addAttribute("categories",categories);
@@ -102,8 +97,7 @@ public class DashboardController {
 
     @GetMapping("/dashboard/addcategory")
     public String addcategory(Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(authentication.getName());
+        User user = getAuthenticatedUser();
         model.addAttribute("user", user);
         model.addAttribute("selectedImage","/icon/gallery-edit.svg");
         return "add_category";
@@ -111,8 +105,7 @@ public class DashboardController {
 
     @PostMapping("/dashboard/addcategory")
     public String inputImage(@ModelAttribute("selectedImage") String selectedImage, Model model){
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(authentication.getName());
+        User user = getAuthenticatedUser();
         model.addAttribute("user", user);
         System.out.println(selectedImage);
         image = selectedImage;
@@ -123,8 +116,7 @@ public class DashboardController {
     @PostMapping("/dashboard/addcategory/save")
     public String inputCategory(@ModelAttribute("category") CategoryDto categoryDto, Model model){
         categoryDto.setImageUrl(image);
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(authentication.getName());
+        User user = getAuthenticatedUser();
         categoryService.saveCategory(categoryDto, user.getUsername());
         model.addAttribute("category", categoryDto);
         return "redirect:/dashboard/addcategory?success";
@@ -149,13 +141,17 @@ public class DashboardController {
     }
 
     @PostMapping("/dashboard/category/delete/{id}")
-    public String deleteTask(@PathVariable("id") int id, Model model){
+    public String deleteTask(@PathVariable("id") int id){
         categoryService.deleteCategory(id);
         return "redirect:/dashboard";
     }
-    private void prepareCategoryView(int id, Model model) {
+
+    private User getAuthenticatedUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        User user = userService.findUserByUsername(authentication.getName());
+        return userService.findUserByUsername(authentication.getName());
+    }
+    private void prepareCategoryView(int id, Model model) {
+        User user = getAuthenticatedUser();
         CategoryDto categoryDto = categoryService.findById(id);
         List<TaskDto> tasks = taskService.findTasksbyCategory(id);
         List<TaskDto> upcoming = new ArrayList<>();

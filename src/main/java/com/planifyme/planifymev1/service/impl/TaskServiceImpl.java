@@ -1,6 +1,5 @@
 package com.planifyme.planifymev1.service.impl;
 
-import com.planifyme.planifymev1.dto.ReminderDto;
 import com.planifyme.planifymev1.dto.TaskDto;
 import com.planifyme.planifymev1.model.Category;
 import com.planifyme.planifymev1.model.Reminder;
@@ -11,22 +10,20 @@ import com.planifyme.planifymev1.repository.ReminderRepository;
 import com.planifyme.planifymev1.repository.TaskRepository;
 import com.planifyme.planifymev1.repository.UserRepository;
 import com.planifyme.planifymev1.service.TaskService;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 import java.util.stream.Collectors;
 
 @Service
 public class TaskServiceImpl implements TaskService {
-
-    private TaskRepository taskRepository;
-    private UserRepository userRepository;
-    private CategoryRepository categoryRepository;
-    private ReminderRepository reminderRepository;
+    private final TaskRepository taskRepository;
+    private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
+    private final ReminderRepository reminderRepository;
 
     public TaskServiceImpl(TaskRepository taskRepository,
                            UserRepository userRepository,
@@ -48,8 +45,7 @@ public class TaskServiceImpl implements TaskService {
         Category category = categoryRepository.findByNamaAndUser(taskDto.getKategori(),user);
         task.setCategory(category);
         task.setStatus(false);
-        Task savedTask = taskRepository.save(task);
-        return savedTask;
+        return taskRepository.save(task);
     }
 
     @Override
@@ -71,12 +67,9 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTaskStatus(int taskId) {
+    public void updateTaskStatus(int taskId) {
         Task task = taskRepository.findByIdTask(taskId);
-        task.setStatus(!task.isStatus());
-        taskRepository.save(task);
-        System.out.println(task.isStatus());
-        return task;
+        taskRepository.updateTaskByStatus(taskId,!task.isStatus());
     }
 
     @Override
@@ -87,11 +80,8 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public Task updateTaskValues(int taskId, TaskDto newTask) {
+    public void updateTaskValues(int taskId, TaskDto newTask) {
         Task task = taskRepository.findByIdTask(taskId);
-        if (!task.getNama().equals(newTask.getNama())){
-            task.setNama(newTask.getNama());
-        }
         LocalDate[] dateReminders = new LocalDate[4];
         if (newTask.getReminder()[0] != null){
             dateReminders[0] = (newTask.getDueDate().minusWeeks(1));
@@ -113,15 +103,11 @@ public class TaskServiceImpl implements TaskService {
             }
         }
         if (!task.getDueDate().equals(newTask.getDueDate())){
+            System.out.println("masuk sini");
             reminderRepository.deleteByTask(task);
-            task.setDueDate(newTask.getDueDate());
         }
-        if (!task.getCategory().getNama().equals(newTask.getKategori())){
-            Category category = categoryRepository.findByNamaAndUser(newTask.getKategori(),task.getUser());
-            task.setCategory(category);
-        }
-        Task savedTask = taskRepository.save(task);
-        return savedTask;
+        Category category = categoryRepository.findByNamaAndUser(newTask.getKategori(),task.getUser());
+        taskRepository.updateTaskField(taskId, newTask.getNama(), category, newTask.getDueDate());
     }
 
 
@@ -148,10 +134,6 @@ public class TaskServiceImpl implements TaskService {
             }
         }
         taskDto.setReminder(remindersString);
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, dd MMM yyyy", Locale.ENGLISH);
-//        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("E, dd MMMM yyyy", Locale.ENGLISH);
-//        taskDto.setFormattedDueDate(task.getDueDate().format(formatter));
-//        taskDto.setFormattedDueDate2(task.getDueDate().format(formatter2));
         if (!task.isStatus() && LocalDate.now().isAfter(task.getDueDate())){
             taskDto.setStatus("Passed Due");
             taskDto.setWarnaStatus("#F01515");

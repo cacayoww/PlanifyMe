@@ -92,7 +92,7 @@ public class SettingController {
             }
         }
 
-        userService.editUser(userDto,user.getUsername());
+        userService.updateUser(user.getIdUser(),userDto);
         return "redirect:/settings/editProfile?success";
     }
 }

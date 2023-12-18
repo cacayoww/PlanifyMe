@@ -7,15 +7,10 @@ import com.planifyme.planifymev1.service.UserService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Service
 public class UserServiceImpl implements UserService {
-
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
-
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public UserServiceImpl(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
@@ -38,11 +33,8 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void editUser(UserDto userDto, String username) {
-        User user = findUserByUsername(username);
-        user.setNamaLengkap(userDto.getNamaLengkap());
-        user.setPassword(passwordEncoder.encode(userDto.getNewPassword()));
-        userRepository.save(user);
+    public void updateUser(int idUser, UserDto userDto) {
+        userRepository.updateUserFields(idUser, userDto.getNamaLengkap(),passwordEncoder.encode(userDto.getNewPassword()));
     }
 
 }

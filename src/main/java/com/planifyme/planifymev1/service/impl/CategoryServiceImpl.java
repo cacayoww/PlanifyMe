@@ -2,7 +2,6 @@ package com.planifyme.planifymev1.service.impl;
 
 import com.planifyme.planifymev1.dto.CategoryDto;
 import com.planifyme.planifymev1.model.Category;
-import com.planifyme.planifymev1.model.Reminder;
 import com.planifyme.planifymev1.model.Task;
 import com.planifyme.planifymev1.model.User;
 import com.planifyme.planifymev1.repository.CategoryRepository;
@@ -12,17 +11,16 @@ import com.planifyme.planifymev1.repository.UserRepository;
 import com.planifyme.planifymev1.service.CategoryService;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
 
-    private CategoryRepository categoryRepository;
-    private UserRepository userRepository;
-    private ReminderRepository reminderRepository;
-    private TaskRepository taskRepository;
+    private final CategoryRepository categoryRepository;
+    private final UserRepository userRepository;
+    private final ReminderRepository reminderRepository;
+    private final TaskRepository taskRepository;
 
     public CategoryServiceImpl(CategoryRepository categoryRepository, UserRepository userRepository, ReminderRepository reminderRepository, TaskRepository taskRepository) {
         this.categoryRepository = categoryRepository;
@@ -59,12 +57,8 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category updateCategoryValues(int idCategory, CategoryDto categoryDto) {
-        Category category = categoryRepository.findByIdCategory(idCategory);
-        category.setNama(categoryDto.getNama());
-        category.setDeskripsi(categoryDto.getDeskripsi());
-        category.setColor(categoryDto.getColor());
-        return categoryRepository.save(category);
+    public void updateCategoryValues(int idCategory, CategoryDto categoryDto) {
+        categoryRepository.updateCategoryFields(idCategory,categoryDto.getNama(),categoryDto.getDeskripsi(),categoryDto.getColor());
     }
 
     @Override
