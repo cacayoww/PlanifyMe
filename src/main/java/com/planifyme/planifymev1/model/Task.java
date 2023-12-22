@@ -18,20 +18,15 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idTask;
-
     @ManyToOne
     @JoinColumn(name = "idUser", nullable = false)
     private User user;
-
     @ManyToOne
     @JoinColumn(name = "idCategory", nullable = false)
     private Category category;
-
     @Column(nullable = false)
     private String nama;
-
     @Column(nullable = false)
     private LocalDate dueDate;
-
     private boolean status;
 }
