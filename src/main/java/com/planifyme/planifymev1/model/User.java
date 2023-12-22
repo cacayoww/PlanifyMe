@@ -23,7 +23,6 @@ public class User {
 
     private String username;
     private String password;
-
     public User(String namaLengkap, String username, String password) {
         this.namaLengkap = namaLengkap;
         this.username = username;
